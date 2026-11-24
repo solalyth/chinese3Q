@@ -1,9 +1,13 @@
 :root {
   --bg: #fafafa;
   --surface: #ffffff;
+  --surface-subtle: #f0f0f2;
   --text: #18181b;
+  --text-secondary: #3f3f46;
   --text-muted: #71717a;
+  --text-hint: #a1a1aa;
   --border: #e4e4e7;
+  --divider: #f4f4f5;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   --accent-1-bg: #fff7ed;
   --accent-1-border: #fed7aa;
@@ -11,6 +15,25 @@
   --accent-5-bg: #f0fdf4;
   --accent-5-border: #bbf7d0;
   --accent-5-text: #15803d;
+}
+
+[data-theme="dark"] {
+  --bg: #111113;
+  --surface: #1c1c1f;
+  --surface-subtle: #27272a;
+  --text: #f4f4f5;
+  --text-secondary: #d4d4d8;
+  --text-muted: #a1a1aa;
+  --text-hint: #71717a;
+  --border: #2e2e32;
+  --divider: #27272a;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --accent-1-bg: #2c1810;
+  --accent-1-border: #7c2d12;
+  --accent-1-text: #fdba74;
+  --accent-5-bg: #0f291a;
+  --accent-5-border: #14532d;
+  --accent-5-text: #86efac;
 }
 
 * {
@@ -27,6 +50,7 @@ body {
   color: var(--text);
   font-family: "Noto Sans", "Noto Sans JP", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .app {
@@ -50,7 +74,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 4px;
   padding: 4px;
-  background: #f0f0f2;
+  background: var(--surface-subtle);
   border-radius: 12px;
 }
 
@@ -72,7 +96,7 @@ body {
   background: var(--surface);
   color: var(--text);
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .status-bar {
@@ -84,6 +108,13 @@ body {
   color: var(--text-muted);
 }
 
+.status-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn,
 .reset-btn {
   appearance: none;
   border: 1px solid var(--border);
@@ -94,12 +125,18 @@ body {
   padding: 4px 10px;
   border-radius: 999px;
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.2s ease;
 }
 
+.icon-btn {
+  padding: 4px 8px;
+  line-height: 1.2;
+}
+
+.icon-btn:active,
 .reset-btn:active {
   color: var(--text);
-  border-color: #a1a1aa;
+  border-color: var(--text-muted);
 }
 
 .stage {
@@ -183,7 +220,7 @@ body {
   position: absolute;
   bottom: 22px;
   font-size: 0.8rem;
-  color: #a1a1aa;
+  color: var(--text-hint);
 }
 
 .back-question {
@@ -200,9 +237,9 @@ body {
 .back-meaning {
   font-size: 1.15rem;
   font-weight: 500;
-  color: #3f3f46;
+  color: var(--text-secondary);
   padding-top: 8px;
-  border-top: 1px solid #f4f4f5;
+  border-top: 1px solid var(--divider);
   width: 80%;
 }
 

@@ -1,6 +1,7 @@
 (() => {
   const STORAGE_KEY = "chinese3Q_schedule_v1";
   const MODE_KEY = "chinese3Q_mode_v1";
+  const THEME_KEY = "chinese3Q_theme_v1";
 
   const state = {
     words: [],
@@ -14,6 +15,7 @@
   const els = {
     modeBtns: document.querySelectorAll(".mode-btn"),
     statusText: document.getElementById("status-text"),
+    themeBtn: document.getElementById("theme-btn"),
     resetBtn: document.getElementById("reset-btn"),
     card: document.getElementById("card"),
     frontLabel: document.getElementById("front-label"),
@@ -233,9 +235,36 @@
       state.currentIndex = null;
       pickNextCard();
     });
+
+    els.themeBtn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      const next = current === "dark" ? "light" : "dark";
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    });
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    els.themeBtn.textContent = theme === "dark" ? "☀️" : "🌙";
+    els.themeBtn.setAttribute(
+      "aria-label",
+      theme === "dark" ? "ライトモードに切替" : "ダークモードに切替"
+    );
+  }
+
+  function initTheme() {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === "dark" || saved === "light") {
+      applyTheme(saved);
+    } else {
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      applyTheme(prefersDark ? "dark" : "light");
+    }
   }
 
   async function init() {
+    initTheme();
     bindEvents();
     try {
       const res = await fetch("./words.json", { cache: "no-cache" });
