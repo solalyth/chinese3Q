@@ -17,7 +17,7 @@
   --accent-5-text: #15803d;
 }
 
-[data-theme="dark"] {
+:root[data-theme="dark"] {
   --bg: #111113;
   --surface: #1c1c1f;
   --surface-subtle: #27272a;
