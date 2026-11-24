@@ -194,6 +194,10 @@ body {
   transform: rotateY(180deg);
 }
 
+.card.no-transition .card-inner {
+  transition: none;
+}
+
 .card-face {
   position: absolute;
   inset: 0;

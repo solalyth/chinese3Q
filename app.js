@@ -142,7 +142,10 @@
 
     els.waitingPanel.classList.add("is-hidden");
     els.card.classList.remove("is-hidden");
+    els.card.classList.add("no-transition");
     setFlipped(false);
+    void els.card.offsetWidth;
+    els.card.classList.remove("no-transition");
 
     if (state.mode === "pinyin-to-hanzi") {
       els.frontLabel.textContent = "ピンイン";
