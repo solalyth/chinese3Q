@@ -108,5 +108,485 @@
     "hanzi": "看",
     "pinyin": "kàn",
     "meaning": "見る"
+  },
+  {
+    "hanzi": "演出",
+    "pinyin": "yǎnchū",
+    "meaning": "公演・出し物"
+  },
+  {
+    "hanzi": "才",
+    "pinyin": "cái",
+    "meaning": "〜してはじめて"
+  },
+  {
+    "hanzi": "老北京",
+    "pinyin": "lǎo Běijīng",
+    "meaning": "昔ながらの北京・生粋の北京っ子"
+  },
+  {
+    "hanzi": "京剧",
+    "pinyin": "jīngjù",
+    "meaning": "京劇"
+  },
+  {
+    "hanzi": "相声",
+    "pinyin": "xiàngsheng",
+    "meaning": "中国の漫才"
+  },
+  {
+    "hanzi": "杂技",
+    "pinyin": "zájì",
+    "meaning": "中国の雑技"
+  },
+  {
+    "hanzi": "等",
+    "pinyin": "děng",
+    "meaning": "など／待つ"
+  },
+  {
+    "hanzi": "感",
+    "pinyin": "gǎn",
+    "meaning": "感じる"
+  },
+  {
+    "hanzi": "兴趣",
+    "pinyin": "xìngqu",
+    "meaning": "興味"
+  },
+  {
+    "hanzi": "特别",
+    "pinyin": "tèbié",
+    "meaning": "とくに"
+  },
+  {
+    "hanzi": "一起",
+    "pinyin": "yìqǐ",
+    "meaning": "一緒に"
+  },
+  {
+    "hanzi": "正好",
+    "pinyin": "zhènghǎo",
+    "meaning": "ちょうどいい"
+  },
+  {
+    "hanzi": "明天",
+    "pinyin": "míngtiān",
+    "meaning": "あした"
+  },
+  {
+    "hanzi": "休息",
+    "pinyin": "xiūxi",
+    "meaning": "休む"
+  },
+  {
+    "hanzi": "就",
+    "pinyin": "jiù",
+    "meaning": "甘く見ない／まさに・ほかならぬ"
+  },
+  {
+    "hanzi": "怎么样",
+    "pinyin": "zěnmeyàng",
+    "meaning": "どうですか"
+  },
+  {
+    "hanzi": "学校",
+    "pinyin": "xuéxiào",
+    "meaning": "学校"
+  },
+  {
+    "hanzi": "门口",
+    "pinyin": "ménkǒu",
+    "meaning": "入り口"
+  },
+  {
+    "hanzi": "星巴克",
+    "pinyin": "Xīngbākè",
+    "meaning": "スターバックス"
+  },
+  {
+    "hanzi": "早上",
+    "pinyin": "zǎoshang",
+    "meaning": "朝"
+  },
+  {
+    "hanzi": "给",
+    "pinyin": "gěi",
+    "meaning": "〜に"
+  },
+  {
+    "hanzi": "介绍",
+    "pinyin": "jièshào",
+    "meaning": "紹介する"
+  },
+  {
+    "hanzi": "一下",
+    "pinyin": "yíxià",
+    "meaning": "ちょっと〜する"
+  },
+  {
+    "hanzi": "老店",
+    "pinyin": "lǎodiàn",
+    "meaning": "老舗"
+  },
+  {
+    "hanzi": "涮羊肉",
+    "pinyin": "shuànyángròu",
+    "meaning": "羊肉のしゃぶしゃぶ"
+  },
+  {
+    "hanzi": "味道",
+    "pinyin": "wèidào",
+    "meaning": "味"
+  },
+  {
+    "hanzi": "家",
+    "pinyin": "jiā",
+    "meaning": "（軒・店・工場・企業などを数える）"
+  },
+  {
+    "hanzi": "饭店",
+    "pinyin": "fàndiàn",
+    "meaning": "レストラン"
+  },
+  {
+    "hanzi": "蘸料",
+    "pinyin": "zhànliào",
+    "meaning": "つけだれ"
+  },
+  {
+    "hanzi": "又",
+    "pinyin": "yòu",
+    "meaning": "また"
+  },
+  {
+    "hanzi": "鲜",
+    "pinyin": "xiān",
+    "meaning": "（素材の味がきかされて）美味しい"
+  },
+  {
+    "hanzi": "嫩",
+    "pinyin": "nèn",
+    "meaning": "（食感が）柔らかい"
+  },
+  {
+    "hanzi": "太好了",
+    "pinyin": "tài hǎo le",
+    "meaning": "とっても良い・よかった・すばらしい"
+  },
+  {
+    "hanzi": "冷",
+    "pinyin": "lěng",
+    "meaning": "寒い"
+  },
+  {
+    "hanzi": "辣",
+    "pinyin": "là",
+    "meaning": "辛い"
+  },
+  {
+    "hanzi": "放心",
+    "pinyin": "fàngxīn",
+    "meaning": "安心する"
+  },
+  {
+    "hanzi": "已经",
+    "pinyin": "yǐjīng",
+    "meaning": "すでに・もう"
+  },
+  {
+    "hanzi": "饥肠辘辘",
+    "pinyin": "jīchánglùlù",
+    "meaning": "腹ペコである"
+  },
+  {
+    "hanzi": "点",
+    "pinyin": "diǎn",
+    "meaning": "指定する"
+  },
+  {
+    "hanzi": "菜",
+    "pinyin": "cài",
+    "meaning": "料理・おかず"
+  },
+  {
+    "hanzi": "饿",
+    "pinyin": "è",
+    "meaning": "お腹がすく・腹が減る"
+  },
+  {
+    "hanzi": "服务员",
+    "pinyin": "fúwùyuán",
+    "meaning": "店員さん"
+  },
+  {
+    "hanzi": "从",
+    "pinyin": "cóng",
+    "meaning": "〜から（起点を表す）"
+  },
+  {
+    "hanzi": "到",
+    "pinyin": "dào",
+    "meaning": "〜まで・〜へ（終点や方向を表す）"
+  },
+  {
+    "hanzi": "开车",
+    "pinyin": "kāichē",
+    "meaning": "運転する"
+  },
+  {
+    "hanzi": "要",
+    "pinyin": "yào",
+    "meaning": "必要とする・かかる"
+  },
+  {
+    "hanzi": "长",
+    "pinyin": "cháng",
+    "meaning": "長い"
+  },
+  {
+    "hanzi": "时间",
+    "pinyin": "shíjiān",
+    "meaning": "時間"
+  },
+  {
+    "hanzi": "离",
+    "pinyin": "lí",
+    "meaning": "〜から（へだたり・距離をはかる基点）"
+  },
+  {
+    "hanzi": "不太",
+    "pinyin": "bú tài",
+    "meaning": "あまり〜ではない"
+  },
+  {
+    "hanzi": "开演",
+    "pinyin": "kāiyǎn",
+    "meaning": "開演する"
+  },
+  {
+    "hanzi": "很",
+    "pinyin": "hěn",
+    "meaning": "とても"
+  },
+  {
+    "hanzi": "挺",
+    "pinyin": "tǐng",
+    "meaning": "なかなか"
+  },
+  {
+    "hanzi": "格外",
+    "pinyin": "géwài",
+    "meaning": "格別に"
+  },
+  {
+    "hanzi": "相当",
+    "pinyin": "xiāngdāng",
+    "meaning": "かなり"
+  },
+  {
+    "hanzi": "特别",
+    "pinyin": "tèbié",
+    "meaning": "とくに"
+  },
+  {
+    "hanzi": "非常",
+    "pinyin": "fēicháng",
+    "meaning": "非常に"
+  },
+  {
+    "hanzi": "点儿",
+    "pinyin": "diǎnr",
+    "meaning": "少し・ちょっと"
+  },
+  {
+    "hanzi": "好嘞",
+    "pinyin": "hǎo lei",
+    "meaning": "はい・かしこまりました"
+  },
+  {
+    "hanzi": "好久不见",
+    "pinyin": "hǎojiǔ bú jiàn",
+    "meaning": "お久しぶり"
+  },
+  {
+    "hanzi": "健身",
+    "pinyin": "jiànshēn",
+    "meaning": "トレーニングをする"
+  },
+  {
+    "hanzi": "健身房",
+    "pinyin": "jiànshēnfáng",
+    "meaning": "フィットネスクラブ"
+  },
+  {
+    "hanzi": "游泳",
+    "pinyin": "yóuyǒng",
+    "meaning": "泳ぐ・水泳をする"
+  },
+  {
+    "hanzi": "会",
+    "pinyin": "huì",
+    "meaning": "〜ができる（技能）・〜するであろう・…するのが上手である"
+  },
+  {
+    "hanzi": "能",
+    "pinyin": "néng",
+    "meaning": "〜ができる（能力・客観的条件）"
+  },
+  {
+    "hanzi": "游",
+    "pinyin": "yóu",
+    "meaning": "泳ぐ"
+  },
+  {
+    "hanzi": "远",
+    "pinyin": "yuǎn",
+    "meaning": "遠い"
+  },
+  {
+    "hanzi": "刚",
+    "pinyin": "gāng",
+    "meaning": "……したばかり・……して間もない"
+  },
+  {
+    "hanzi": "米",
+    "pinyin": "mǐ",
+    "meaning": "メートル"
+  },
+  {
+    "hanzi": "运动",
+    "pinyin": "yùndòng",
+    "meaning": "スポーツ"
+  },
+  {
+    "hanzi": "打网球",
+    "pinyin": "dǎ wǎngqiú",
+    "meaning": "テニスをする"
+  },
+  {
+    "hanzi": "知道",
+    "pinyin": "zhīdao",
+    "meaning": "知る"
+  },
+  {
+    "hanzi": "网球场",
+    "pinyin": "wǎngqiúchǎng",
+    "meaning": "テニスコート"
+  },
+  {
+    "hanzi": "可以",
+    "pinyin": "kěyǐ",
+    "meaning": "〜ができる（許可）・〜してよろしい"
+  },
+  {
+    "hanzi": "免费",
+    "pinyin": "miǎnfèi",
+    "meaning": "無料にする・ただにする"
+  },
+  {
+    "hanzi": "使用",
+    "pinyin": "shǐyòng",
+    "meaning": "使用する"
+  },
+  {
+    "hanzi": "室内",
+    "pinyin": "shìnèi",
+    "meaning": "室内"
+  },
+  {
+    "hanzi": "还是",
+    "pinyin": "háishi",
+    "meaning": "それとも"
+  },
+  {
+    "hanzi": "室外",
+    "pinyin": "shìwài",
+    "meaning": "室外"
+  },
+  {
+    "hanzi": "只是",
+    "pinyin": "zhǐshì",
+    "meaning": "ただ……だけだ"
+  },
+  {
+    "hanzi": "要",
+    "pinyin": "yào",
+    "meaning": "〜しようと思う・〜するつもりだ・〜しなければならない"
+  },
+  {
+    "hanzi": "事先",
+    "pinyin": "shìxiān",
+    "meaning": "事前に・前もって"
+  },
+  {
+    "hanzi": "预约",
+    "pinyin": "yùyuē",
+    "meaning": "予約する"
+  },
+  {
+    "hanzi": "想",
+    "pinyin": "xiǎng",
+    "meaning": "〜したい"
+  },
+  {
+    "hanzi": "电影",
+    "pinyin": "diànyǐng",
+    "meaning": "映画"
+  },
+  {
+    "hanzi": "可是",
+    "pinyin": "kěshì",
+    "meaning": "しかし"
+  },
+  {
+    "hanzi": "不行",
+    "pinyin": "bùxíng",
+    "meaning": "だめ・いけません"
+  },
+  {
+    "hanzi": "下星期",
+    "pinyin": "xià xīngqī",
+    "meaning": "来週"
+  },
+  {
+    "hanzi": "考试",
+    "pinyin": "kǎoshì",
+    "meaning": "テストする・テスト・試験"
+  },
+  {
+    "hanzi": "汉语水平考试",
+    "pinyin": "Hànyǔ shuǐpíng kǎoshì",
+    "meaning": "HSK（中国語の語学検定試験）"
+  },
+  {
+    "hanzi": "得",
+    "pinyin": "děi",
+    "meaning": "（やむを得ない事情で）〜しなければならない"
+  },
+  {
+    "hanzi": "复习",
+    "pinyin": "fùxí",
+    "meaning": "復習する・おさらいをする"
+  },
+  {
+    "hanzi": "功课",
+    "pinyin": "gōngkè",
+    "meaning": "（宿題や予習などの）勉強"
+  },
+  {
+    "hanzi": "好吧",
+    "pinyin": "hǎo ba",
+    "meaning": "わかった・よかろう"
+  },
+  {
+    "hanzi": "加油",
+    "pinyin": "jiāyóu",
+    "meaning": "頑張る"
+  },
+  {
+    "hanzi": "回头见",
+    "pinyin": "huítóu jiàn",
+    "meaning": "またあとで"
   }
 ]
