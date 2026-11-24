@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Chinese 3Q - 中国語単語カード</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="mode-switch" role="tablist" aria-label="出題方向">
+        <button
+          id="mode-pinyin"
+          class="mode-btn is-active"
+          role="tab"
+          aria-selected="true"
+          data-mode="pinyin-to-hanzi"
+          type="button"
+        >
+          ピンイン → 漢字
+        </button>
+        <button
+          id="mode-hanzi"
+          class="mode-btn"
+          role="tab"
+          aria-selected="false"
+          data-mode="hanzi-to-pinyin"
+          type="button"
+        >
+          漢字 → ピンイン
+        </button>
+      </div>
+      <div class="status-bar">
+        <span id="status-text" class="status-text">読み込み中...</span>
+        <button id="reset-btn" class="reset-btn" type="button" title="学習履歴をリセット">
+          リセット
+        </button>
+      </div>
+    </header>
+
+    <section class="stage" aria-live="polite">
+      <div
+        id="card"
+        class="card"
+        role="button"
+        tabindex="0"
+        aria-label="カードをタップして裏返す"
+      >
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <span id="front-label" class="face-label">ピンイン</span>
+            <div id="front-main" class="front-main"></div>
+            <span class="tap-hint">タップして答えを見る</span>
+          </div>
+          <div class="card-face card-back">
+            <span id="back-question" class="back-question"></span>
+            <div id="back-primary" class="back-primary"></div>
+            <div id="back-meaning" class="back-meaning"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="waiting-panel" class="waiting-panel is-hidden">
+        <p class="waiting-title">今は出題待ちのカードのみです</p>
+        <p id="waiting-countdown" class="waiting-countdown">次のカードまであと -- 秒</p>
+        <button id="force-next-btn" class="force-next-btn" type="button">
+          待たずに次のカードを引く
+        </button>
+      </div>
+    </section>
+
+    <footer class="actions">
+      <button
+        id="btn-1min"
+        class="action-btn action-btn-1"
+        type="button"
+        disabled
+      >
+        <span class="action-time">1分後</span>
+        <span class="action-sub">もう一度</span>
+      </button>
+      <button
+        id="btn-5min"
+        class="action-btn action-btn-5"
+        type="button"
+        disabled
+      >
+        <span class="action-time">5分後</span>
+        <span class="action-sub">わかった</span>
+      </button>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
