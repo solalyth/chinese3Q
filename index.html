@@ -10,7 +10,7 @@
     href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
   <main class="app">
@@ -48,6 +48,10 @@
           </button>
         </div>
       </div>
+      <div class="progress-bar" role="progressbar" aria-label="学習の進捗">
+        <div id="progress-mastered" class="progress-seg progress-mastered"></div>
+        <div id="progress-learning" class="progress-seg progress-learning"></div>
+      </div>
     </header>
 
     <section class="stage" aria-live="polite">
@@ -73,7 +77,7 @@
       </div>
 
       <div id="waiting-panel" class="waiting-panel is-hidden">
-        <p class="waiting-title">今は出題待ちのカードのみです</p>
+        <p id="waiting-title" class="waiting-title">今は出題待ちのカードのみです</p>
         <p id="waiting-countdown" class="waiting-countdown">次のカードまであと -- 秒</p>
         <button id="force-next-btn" class="force-next-btn" type="button">
           待たずに次のカードを引く
@@ -97,12 +101,12 @@
         type="button"
         disabled
       >
-        <span class="action-time">5分後</span>
-        <span class="action-sub">わかった</span>
+        <span class="action-time">5分後 (OK)</span>
+        <span id="btn-5min-sub" class="action-sub">3回で習得</span>
       </button>
     </footer>
   </main>
 
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>

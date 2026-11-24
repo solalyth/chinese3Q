@@ -1,12 +1,16 @@
 (() => {
-  const STORAGE_KEY = "chinese3Q_schedule_v1";
+  const STORAGE_KEY = "chinese3Q_deck_v2";
   const MODE_KEY = "chinese3Q_mode_v1";
   const THEME_KEY = "chinese3Q_theme_v1";
+
+  // デック設定（割合などはここを変更）
+  const MASTER_OK_COUNT = 3; // OK をこの回数達成したら二度と出題しない
+  const NEW_CARD_RATIO = 0.25; // 未出題が残っているときに未出題を出す割合 (1/4)
 
   const state = {
     words: [],
     mode: localStorage.getItem(MODE_KEY) || "pinyin-to-hanzi",
-    schedule: loadSchedule(),
+    deck: loadDeck(),
     currentIndex: null,
     isFlipped: false,
     countdownTimer: null,
@@ -15,6 +19,8 @@
   const els = {
     modeBtns: document.querySelectorAll(".mode-btn"),
     statusText: document.getElementById("status-text"),
+    progressMastered: document.getElementById("progress-mastered"),
+    progressLearning: document.getElementById("progress-learning"),
     themeBtn: document.getElementById("theme-btn"),
     resetBtn: document.getElementById("reset-btn"),
     card: document.getElementById("card"),
@@ -24,13 +30,15 @@
     backPrimary: document.getElementById("back-primary"),
     backMeaning: document.getElementById("back-meaning"),
     waitingPanel: document.getElementById("waiting-panel"),
+    waitingTitle: document.getElementById("waiting-title"),
     waitingCountdown: document.getElementById("waiting-countdown"),
     forceNextBtn: document.getElementById("force-next-btn"),
     btn1Min: document.getElementById("btn-1min"),
     btn5Min: document.getElementById("btn-5min"),
+    btn5MinSub: document.getElementById("btn-5min-sub"),
   };
 
-  function loadSchedule() {
+  function loadDeck() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       return raw ? JSON.parse(raw) : {};
@@ -39,9 +47,9 @@
     }
   }
 
-  function saveSchedule() {
+  function saveDeck() {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.schedule));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.deck));
     } catch {
       // Ignore storage quota errors
     }
@@ -51,32 +59,66 @@
     return `${mode}:${word.hanzi}:${word.pinyin}`;
   }
 
-  function getDueIndices(now = Date.now()) {
-    const due = [];
-    state.words.forEach((word, idx) => {
-      const dueAt = state.schedule[cardKey(state.mode, word)] || 0;
-      if (dueAt <= now) {
-        due.push(idx);
-      }
-    });
-    return due;
+  function getCardState(word) {
+    const entry = state.deck[cardKey(state.mode, word)];
+    if (!entry) {
+      return { seen: false, okCount: 0, dueAt: 0 };
+    }
+    return {
+      seen: Boolean(entry.seen),
+      okCount: Number(entry.okCount) || 0,
+      dueAt: Number(entry.dueAt) || 0,
+    };
   }
 
-  function getNextDueTime() {
-    let minTime = Infinity;
-    state.words.forEach((word) => {
-      const dueAt = state.schedule[cardKey(state.mode, word)] || 0;
-      if (dueAt > Date.now() && dueAt < minTime) {
-        minTime = dueAt;
+  function isMastered(cardState) {
+    return cardState.okCount >= MASTER_OK_COUNT;
+  }
+
+  function getPools(now = Date.now()) {
+    const unseen = [];
+    const reviewDue = [];
+    const reviewWaiting = [];
+    let masteredCount = 0;
+    let learningCount = 0;
+
+    state.words.forEach((word, idx) => {
+      const cs = getCardState(word);
+      if (isMastered(cs)) {
+        masteredCount += 1;
+      } else if (!cs.seen) {
+        unseen.push(idx);
+      } else {
+        learningCount += 1;
+        if (cs.dueAt <= now) {
+          reviewDue.push(idx);
+        } else {
+          reviewWaiting.push({ idx, dueAt: cs.dueAt });
+        }
       }
     });
-    return minTime === Infinity ? null : minTime;
+
+    return {
+      unseen,
+      reviewDue,
+      reviewWaiting,
+      masteredCount,
+      learningCount,
+      unseenCount: unseen.length,
+    };
   }
 
   function updateStatus() {
     const total = state.words.length;
-    const dueCount = getDueIndices().length;
-    els.statusText.textContent = `出題可能 ${dueCount} / ${total} 語`;
+    if (total === 0) return;
+
+    const { masteredCount, learningCount, unseenCount } = getPools();
+    els.statusText.textContent = `習得 ${masteredCount} / ${total}（学習中 ${learningCount}・未出題 ${unseenCount}）`;
+
+    const masteredPct = (masteredCount / total) * 100;
+    const learningPct = (learningCount / total) * 100;
+    els.progressMastered.style.width = `${masteredPct}%`;
+    els.progressLearning.style.width = `${learningPct}%`;
   }
 
   function clearCountdown() {
@@ -95,6 +137,7 @@
 
   function renderCard(index) {
     const word = state.words[index];
+    const cs = getCardState(word);
     state.currentIndex = index;
 
     els.waitingPanel.classList.add("is-hidden");
@@ -121,6 +164,22 @@
       els.backMeaning.textContent = word.meaning;
     }
 
+    const remainingOk = MASTER_OK_COUNT - cs.okCount;
+    els.btn5MinSub.textContent =
+      remainingOk <= 1 ? "これで習得！" : `あと ${remainingOk} 回で習得`;
+
+    updateStatus();
+  }
+
+  function showCompleted() {
+    clearCountdown();
+    state.currentIndex = null;
+    setFlipped(false);
+    els.card.classList.add("is-hidden");
+    els.waitingPanel.classList.remove("is-hidden");
+    els.waitingTitle.textContent = "すべての単語を習得しました！";
+    els.waitingCountdown.textContent = "リセットすると最初からやり直せます";
+    els.forceNextBtn.classList.add("is-hidden");
     updateStatus();
   }
 
@@ -129,16 +188,19 @@
     setFlipped(false);
     els.card.classList.add("is-hidden");
     els.waitingPanel.classList.remove("is-hidden");
+    els.waitingTitle.textContent = "今は出題待ちのカードのみです";
+    els.forceNextBtn.classList.remove("is-hidden");
     updateStatus();
 
     clearCountdown();
     const tick = () => {
-      const nextDue = getNextDueTime();
-      if (!nextDue) {
+      const { reviewWaiting } = getPools();
+      if (reviewWaiting.length === 0) {
         clearCountdown();
         pickNextCard();
         return;
       }
+      const nextDue = Math.min(...reviewWaiting.map((item) => item.dueAt));
       const diffSec = Math.max(0, Math.ceil((nextDue - Date.now()) / 1000));
       if (diffSec <= 0) {
         clearCountdown();
@@ -157,35 +219,62 @@
     state.countdownTimer = setInterval(tick, 1000);
   }
 
+  function pickRandomFrom(pool) {
+    let candidates = pool;
+    if (candidates.length > 1 && state.currentIndex !== null) {
+      candidates = candidates.filter((i) => i !== state.currentIndex);
+    }
+    return candidates[Math.floor(Math.random() * candidates.length)];
+  }
+
   function pickNextCard({ force = false } = {}) {
     clearCountdown();
     if (state.words.length === 0) return;
 
-    const due = getDueIndices();
-    let pool = due;
+    const { unseen, reviewDue, reviewWaiting } = getPools();
 
-    if (pool.length === 0) {
-      if (!force) {
-        showWaiting();
-        return;
-      }
-      pool = state.words.map((_, i) => i);
+    // 全カード習得済み
+    if (unseen.length === 0 && reviewDue.length === 0 && reviewWaiting.length === 0) {
+      showCompleted();
+      return;
     }
 
-    // Avoid showing the exact same card twice in a row when other cards exist
-    if (pool.length > 1 && state.currentIndex !== null) {
-      pool = pool.filter((i) => i !== state.currentIndex);
+    let chosenPool = null;
+
+    if (unseen.length > 0 && reviewDue.length > 0) {
+      chosenPool = Math.random() < NEW_CARD_RATIO ? unseen : reviewDue;
+    } else if (unseen.length > 0) {
+      chosenPool = unseen;
+    } else if (reviewDue.length > 0) {
+      chosenPool = reviewDue;
+    } else if (force && reviewWaiting.length > 0) {
+      chosenPool = reviewWaiting.map((item) => item.idx);
     }
 
-    const chosen = pool[Math.floor(Math.random() * pool.length)];
-    renderCard(chosen);
+    if (!chosenPool) {
+      showWaiting();
+      return;
+    }
+
+    renderCard(pickRandomFrom(chosenPool));
   }
 
-  function scheduleCurrent(minutes) {
+  function recordResult(isOk) {
     if (state.currentIndex === null || !state.isFlipped) return;
     const word = state.words[state.currentIndex];
-    state.schedule[cardKey(state.mode, word)] = Date.now() + minutes * 60 * 1000;
-    saveSchedule();
+    const key = cardKey(state.mode, word);
+    const prev = getCardState(word);
+
+    const nextOkCount = isOk ? prev.okCount + 1 : prev.okCount;
+    const delayMin = isOk ? 5 : 1;
+
+    state.deck[key] = {
+      seen: true,
+      okCount: nextOkCount,
+      dueAt: nextOkCount >= MASTER_OK_COUNT ? Infinity : Date.now() + delayMin * 60 * 1000,
+    };
+
+    saveDeck();
     pickNextCard();
   }
 
@@ -199,6 +288,26 @@
     });
     state.currentIndex = null;
     pickNextCard();
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    els.themeBtn.textContent = theme === "dark" ? "☀️" : "🌙";
+    els.themeBtn.setAttribute(
+      "aria-label",
+      theme === "dark" ? "ライトモードに切替" : "ダークモードに切替"
+    );
+  }
+
+  function initTheme() {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === "dark" || saved === "light") {
+      applyTheme(saved);
+    } else {
+      const prefersDark =
+        window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      applyTheme(prefersDark ? "dark" : "light");
+    }
   }
 
   function bindEvents() {
@@ -223,44 +332,26 @@
       }
     });
 
-    els.btn1Min.addEventListener("click", () => scheduleCurrent(1));
-    els.btn5Min.addEventListener("click", () => scheduleCurrent(5));
+    els.btn1Min.addEventListener("click", () => recordResult(false));
+    els.btn5Min.addEventListener("click", () => recordResult(true));
     els.forceNextBtn.addEventListener("click", () => pickNextCard({ force: true }));
 
     els.resetBtn.addEventListener("click", () => {
       state.words.forEach((word) => {
-        delete state.schedule[cardKey(state.mode, word)];
+        delete state.deck[cardKey(state.mode, word)];
       });
-      saveSchedule();
+      saveDeck();
       state.currentIndex = null;
       pickNextCard();
     });
 
     els.themeBtn.addEventListener("click", () => {
-      const current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      const current =
+        document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
       const next = current === "dark" ? "light" : "dark";
       localStorage.setItem(THEME_KEY, next);
       applyTheme(next);
     });
-  }
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    els.themeBtn.textContent = theme === "dark" ? "☀️" : "🌙";
-    els.themeBtn.setAttribute(
-      "aria-label",
-      theme === "dark" ? "ライトモードに切替" : "ダークモードに切替"
-    );
-  }
-
-  function initTheme() {
-    const saved = localStorage.getItem(THEME_KEY);
-    if (saved === "dark" || saved === "light") {
-      applyTheme(saved);
-    } else {
-      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      applyTheme(prefersDark ? "dark" : "light");
-    }
   }
 
   async function init() {
